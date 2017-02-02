@@ -1,6 +1,6 @@
-var express = require('express');
-var models = require('../models/index');
-var itemHandler = require('../handlers/item.handler');
+import express from 'express';
+import models from '../models/index';
+import itemHandler from '../handlers/item.handler';
 var router = express.Router();
 
 /* GET items listing. */
@@ -11,4 +11,4 @@ router.put('/:id', itemHandler.updateItem);
 router.delete('/:id', itemHandler.deleteItem);
 router.get('/store/:id', itemHandler.getItemsByStoreId)
 
-module.exports = router;
+export { router as itemRoutes }

@@ -1,6 +1,6 @@
-var express = require('express');
-var models = require('../models/index');
-var purchaseHandler = require('../handlers/purchase.handler');
+import express from 'express';
+import models from '../models/index';
+import purchaseHandler from '../handlers/purchase.handler';
 var router = express.Router();
 
 /* GET purchases listing. */
@@ -12,4 +12,4 @@ router.put('/:id', purchaseHandler.updatePurchase);
 router.delete('/:id', purchaseHandler.deletePurchase);
 router.get('/item/:id', purchaseHandler.getLastPurchaseByItemId);
 
-module.exports = router;
+export { router as purchaseRoutes }

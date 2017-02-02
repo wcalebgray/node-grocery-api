@@ -1,6 +1,6 @@
-var express = require('express');
-var models = require('../models/index');
-var storeNameHandler = require('../handlers/storename.handler');
+import express from 'express';
+import models from '../models/index';
+import storeNameHandler from '../handlers/storename.handler';
 var router = express.Router();
 
 /* GET storeNames listing. */
@@ -10,4 +10,4 @@ router.get('/:id', storeNameHandler.getStoreNameById);
 router.put('/:id', storeNameHandler.updateStoreName);
 router.delete('/:id', storeNameHandler.deleteStoreName);
 
-module.exports = router;
+export { router as storeNameRoutes }

@@ -1,7 +1,7 @@
-var models = require('../models/index');
+import models from '../models/index';
 
-var ItemNameHandler = {
-  getAllItemNames: function(req, res, next) {
+export default class ItemNameHandler {
+  getAllItemNames(req, res, next) {
     models.ItemName.findAll({
       include: [{
         model: Item,
@@ -11,20 +11,20 @@ var ItemNameHandler = {
         }]
       }]
     })
-    .then(function(itemNames) {
+    .then((itemNames) => {
       res.json(itemNames);
     });
-  },
+  }
 
-  createItemName: function(req, res, next) {
+  createItemName(req, res, next) {
     models.ItemName.create({
       name: req.body.name
-    }).then(function(itemName) {
+    }).then((itemName) => {
       res.json(itemName);
     });
-  },
+  }
 
-  getItemNameById: function(req, res, next) {
+  getItemNameById(req, res, next) {
     models.ItemName.find({
       where: {
         id: req.params.id
@@ -36,12 +36,13 @@ var ItemNameHandler = {
           include: [StoreName]
         }]
       }]
-    }).then(function(itemName) {
+    })
+    .then((itemName) => {
       res.json(itemName);
     });
-  },
+  }
 
-  updateItemName: function(req, res, next) {
+  updateItemName(req, res, next) {
     models.ItemName.find({
       where: {
         id: req.params.id
@@ -53,30 +54,28 @@ var ItemNameHandler = {
           include: [StoreName]
         }]
       }]
-    }).then(function(itemName) {
+    })
+    .then((itemName) => {
       if(itemName){
         var updateParams = req.body;
-
-        itemName.updateAttributes(updateParams)
-        .then(function(itemName) {
-          res.send(itemName);
-        });
+        return itemName.updateAttributes(updateParams)
+      } else {
+        throw new Error("No ItemName Found to Update!");
       }
+    })
+    .then((itemName) => {
+      res.send(itemName);
     });
-  },
+  }
 
-  deleteItemName: function(req, res, next) {
+  deleteItemName(req, res, next) {
     models.ItemName.destroy({
       where: {
         id: req.params.id
       }
-    }).then(function(itemName) {
+    })
+    .then((itemName) => {
       res.json(itemName);
     });
-  },
-
-
-
-};
-
-module.exports = ItemNameHandler;
+  }
+}

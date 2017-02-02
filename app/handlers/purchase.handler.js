@@ -1,7 +1,7 @@
-var models = require('../models/index');
+import models from '../models/index';
 
-var PurchaseHandler = {
-  getAllPurchases: function(req, res, next) {
+export default class PurchaseHandler {
+  getAllPurchases(req, res, next) {
     models.Purchase.findAll({
       include: [{
         model: Item,
@@ -11,12 +11,12 @@ var PurchaseHandler = {
         },ItemName]
       }]
     })
-    .then(function(purchases) {
+    .then((purchases) => {
       res.json(purchases);
     });
-  },
+  }
 
-  getAllPurchasesByDate: function(req, res, next){
+  getAllPurchasesByDate(req, res, next){
     var startTime = new Date(req.params.startTime).toISOString();
     var endTime = new Date(req.params.endTime).toISOString();
     models.Purchase.findAll({
@@ -33,23 +33,24 @@ var PurchaseHandler = {
         },ItemName]
       }]
     })
-    .then(function(purchases) {
+    .then((purchases) => {
       res.json(purchases);
     });
-  },
+  }
 
-  createPurchase: function(req, res, next) {
+  createPurchase(req, res, next) {
     models.Purchase.create({
       itemId: req.body.itemId,
       date: req.body.date,
       costPerUnit: req.body.costPerUnit,
       units: req.body.units
-    }).then(function(purchase) {
+    })
+    .then((purchase) => {
       res.json(purchase);
     });
-  },
+  }
 
-  getPurchaseById: function(req, res, next) {
+  getPurchaseById(req, res, next) {
     models.Purchase.find({
       where: {
         id: req.params.id
@@ -61,12 +62,13 @@ var PurchaseHandler = {
           include: [StoreName]
         },ItemName]
       }]
-    }).then(function(purchase) {
+    })
+    .then((purchase) => {
       res.json(purchase);
     });
-  },
+  }
 
-  updatePurchase: function(req, res, next) {
+  updatePurchase(req, res, next) {
     models.Purchase.find({
       where: {
         id: req.params.id
@@ -78,29 +80,32 @@ var PurchaseHandler = {
           include: [StoreName]
         },ItemName]
       }]
-    }).then(function(purchase) {
+    })
+    .then((purchase) => {
       if(purchase){
         var updateParams = req.body;
-
-        purchase.updateAttributes(updateParams)
-        .then(function(purchase) {
-          res.send(purchase);
-        });
+        return purchase.updateAttributes(updateParams)
+      } else {
+        throw new Error("No Purchase Found to Update!");
       }
-    });
-  },
+    })
+    .then((purchase) => {
+      res.send(purchase);
+    });;
+  }
 
-  deletePurchase: function(req, res, next) {
+  deletePurchase(req, res, next) {
     models.Purchase.destroy({
       where: {
         id: req.params.id
       }
-    }).then(function(purchase) {
+    })
+    .then((purchase) => {
       res.json(purchase);
     });
-  },
+  }
 
-  getLastPurchaseByItemId: function(req, res, next){
+  getLastPurchaseByItemId(req, res, next){
     models.Purchase.findAll({
       limit: 1,
       where: {
@@ -115,13 +120,8 @@ var PurchaseHandler = {
         },ItemName]
       }]
     })
-    .then(function(purchase) {
+    .then((purchase) => {
       res.json(purchase);
     });
   }
-
-
-
-};
-
-module.exports = PurchaseHandler;
+}

@@ -1,6 +1,6 @@
-var express = require('express');
-var models = require('../models/index');
-var userHandler = require('../handlers/user.handler');
+import express from 'express';
+import models from '../models/index';
+import userHandler from '../handlers/user.handler';
 var router = express.Router();
 
 /* GET users listing. */
@@ -10,4 +10,4 @@ router.get('/:id', userHandler.getUserById);
 router.put('/:id', userHandler.updateUser);
 router.delete('/:id', userHandler.deleteUser);
 
-module.exports = router;
+export { router as userRoutes }
