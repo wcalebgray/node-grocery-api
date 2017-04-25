@@ -1,13 +1,13 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var StoreName = sequelize.define('StoreName', {
+  var StoreChain = sequelize.define('StoreChain', {
     name: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
-        StoreName.hasMany(models.Store)
+        StoreChain.hasMany(models.Store)
       }
     }
   });
-  return StoreName;
+  return StoreChain;
 };

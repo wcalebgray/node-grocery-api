@@ -5,7 +5,7 @@ export default class ItemHandler {
     models.Item.findAll({
       include: [{
         model: Store,
-        include: [StoreName]
+        include: [StoreChain]
       }, ItemName]
     })
     .then((items) => {
@@ -32,7 +32,7 @@ export default class ItemHandler {
       },
       include: [{
         model: Store,
-        include: [StoreName]
+        include: [StoreChain]
       }, ItemName]
     })
     .then((item) => {
@@ -47,7 +47,7 @@ export default class ItemHandler {
       },
       include: [{
         model: Store,
-        include: [StoreName]
+        include: [StoreChain]
       }, ItemName]
     })
     .then((item) => {
@@ -81,7 +81,7 @@ export default class ItemHandler {
       },
       include: [{
         model: Store,
-        include: [StoreName]
+        include: [StoreChain]
       }, ItemName]
     })
     .then((items) => {

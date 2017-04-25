@@ -7,7 +7,7 @@ export default class PurchaseHandler {
         model: Item,
         include: [{
           model: Store,
-          include: [StoreName]
+          include: [StoreChain]
         },ItemName]
       }]
     })
@@ -27,9 +27,14 @@ export default class PurchaseHandler {
       },
       include: [{
         model: Item,
+        where: {
+          date: {
+            $between: [startTime, endTime]
+          }
+        },
         include: [{
           model: Store,
-          include: [StoreName]
+          include: [StoreChain]
         },ItemName]
       }]
     })
@@ -59,7 +64,7 @@ export default class PurchaseHandler {
         model: Item,
         include: [{
           model: Store,
-          include: [StoreName]
+          include: [StoreChain]
         },ItemName]
       }]
     })
@@ -77,7 +82,7 @@ export default class PurchaseHandler {
         model: Item,
         include: [{
           model: Store,
-          include: [StoreName]
+          include: [StoreChain]
         },ItemName]
       }]
     })
@@ -91,7 +96,7 @@ export default class PurchaseHandler {
     })
     .then((purchase) => {
       res.send(purchase);
-    });;
+    });
   }
 
   deletePurchase(req, res, next) {
@@ -116,7 +121,7 @@ export default class PurchaseHandler {
         model: Item,
         include: [{
           model: Store,
-          include: [StoreName]
+          include: [StoreChain]
         },ItemName]
       }]
     })

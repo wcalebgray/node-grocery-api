@@ -3,7 +3,7 @@ import models from '../models/index';
 export default class StoreHandler {
   getAllStores(req, res, next) {
     models.Store.findAll({
-      include: [StoreName]
+      include: [StoreChain]
     })
     .then((stores) => {
       res.json(stores);
@@ -12,7 +12,7 @@ export default class StoreHandler {
 
   createStore(req, res, next) {
     models.Store.create({
-      storeNameId: req.body.storeNameId,
+      StoreChainId: req.body.StoreChainId,
       city: req.body.city,
       state: req.body.state,
       zip: req.body.zip
@@ -27,7 +27,7 @@ export default class StoreHandler {
       where: {
         id: req.params.id
       },
-      include: [StoreName]
+      include: [StoreChain]
     })
     .then((store) => {
       res.json(store);
@@ -39,7 +39,7 @@ export default class StoreHandler {
       where: {
         id: req.params.id
       },
-      include: [StoreName]
+      include: [StoreChain]
     })
     .then((store) => {
       if(store){
@@ -51,7 +51,7 @@ export default class StoreHandler {
     })
     .then((store) => {
       res.send(store);
-    });;
+    });
   }
 
   deleteStore(req, res, next) {

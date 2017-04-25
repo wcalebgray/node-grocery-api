@@ -1,7 +1,7 @@
 require('dotenv').config()
 import express from 'express';
 import path from 'path';
-import favicon from 'serve-favicon';
+// import favicon from 'serve-favicon';
 import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
@@ -9,6 +9,7 @@ import bodyParser from 'body-parser';
 import indexRoutes from './routes/index';
 import userRoutes from './routes/users';
 import storeRoutes from './routes/stores';
+import storeChainRoutes from './routes/storechains';
 import itemNameRoutes from './routes/itemnames';
 import itemRoutes from './routes/items';
 import purchaseRoutes from './routes/purchases';
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRoutes);
 app.use('/users', userRoutes);
 app.use('/stores', storeRoutes);
+app.use('/storeChains', storeChainRoutes);
 app.use('/itemNames', itemNameRoutes);
 app.use('/items', itemRoutes);
 app.use('/purchases', purchaseRoutes);
@@ -48,10 +50,10 @@ app.use((req, res, next) => {
 if (app.get('env') === 'development') {
   app.use((err, req, res, next) => {
     res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
+    // res.render('error', {
+    //   message: err.message,
+    //   error: err
+    // });
   });
 }
 
@@ -59,11 +61,11 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use((err, req, res, next) => {
   res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+  // res.render('error', {
+  //   message: err.message,
+  //   error: {}
+  // });
 });
 
 
-export { app }
+module.exports = app;

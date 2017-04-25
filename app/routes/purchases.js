@@ -1,6 +1,6 @@
 import express from 'express';
-import models from '../models/index';
-import purchaseHandler from '../handlers/purchase.handler';
+import PurchaseHandler from '../handlers/purchase.handler';
+var purchaseHandler = new PurchaseHandler();
 var router = express.Router();
 
 /* GET purchases listing. */
@@ -12,4 +12,4 @@ router.put('/:id', purchaseHandler.updatePurchase);
 router.delete('/:id', purchaseHandler.deletePurchase);
 router.get('/item/:id', purchaseHandler.getLastPurchaseByItemId);
 
-export { router as purchaseRoutes }
+export default router

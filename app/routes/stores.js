@@ -1,6 +1,6 @@
 import express from 'express';
-import models from '../models/index';
-import storeHandler from '../handlers/store.handler';
+import StoreHandler from '../handlers/store.handler';
+var storeHandler = new StoreHandler();
 var router = express.Router();
 
 /* GET stores listing. */
@@ -10,4 +10,4 @@ router.get('/:id', storeHandler.getStoreById);
 router.put('/:id', storeHandler.updateStore);
 router.delete('/:id', storeHandler.deleteStore);
 
-export { router as storeRoutes }
+export default router

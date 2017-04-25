@@ -1,6 +1,6 @@
 import express from 'express';
-import models from '../models/index';
-import itemHandler from '../handlers/item.handler';
+import ItemHandler from '../handlers/item.handler';
+var itemHandler = new ItemHandler();
 var router = express.Router();
 
 /* GET items listing. */
@@ -11,4 +11,4 @@ router.put('/:id', itemHandler.updateItem);
 router.delete('/:id', itemHandler.deleteItem);
 router.get('/store/:id', itemHandler.getItemsByStoreId)
 
-export { router as itemRoutes }
+export default router

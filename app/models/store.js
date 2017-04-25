@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         Store.hasMany(models.Item),
-        Store.belongsTo(models.StoreName),
+        Store.belongsTo(models.StoreChain),
         Store.belongsToMany(models.User, {through: 'UserStore'})
       }
     }

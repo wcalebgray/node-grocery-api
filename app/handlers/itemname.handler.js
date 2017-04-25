@@ -7,7 +7,7 @@ export default class ItemNameHandler {
         model: Item,
         include: [{
           model: Store,
-          include: [StoreName]
+          include: [StoreChain]
         }]
       }]
     })
@@ -33,7 +33,7 @@ export default class ItemNameHandler {
         model: Item,
         include: [{
           model: Store,
-          include: [StoreName]
+          include: [StoreChain]
         }]
       }]
     })
@@ -51,7 +51,7 @@ export default class ItemNameHandler {
         model: Item,
         include: [{
           model: Store,
-          include: [StoreName]
+          include: [StoreChain]
         }]
       }]
     })
